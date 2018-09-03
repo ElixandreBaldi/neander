@@ -3,9 +3,9 @@ use ieee.std_logic_1164.all;
 
 entity CCC is
 	port(
-        Q : in std_logic_vector(4 downto 0);        
-        K : out  std_logic_vector(4 downto 0);
-        J : out  std_logic_vector(4 downto 0)       
+        Q : in std_logic_vector(3 downto 0);        
+        K : out  std_logic_vector(3 downto 0);
+        J : out  std_logic_vector(3 downto 0)       
 	);
 end CCC;
 

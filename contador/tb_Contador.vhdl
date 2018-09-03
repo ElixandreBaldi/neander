@@ -16,25 +16,24 @@ architecture comp of tb_Contador is
 		);
 	end component;
 
-    signal clks: std_logic;
-    signal P: std_logic;
-    signal R: std_logic;
+    signal clks: std_logic := '0';
+    signal P: std_logic := '1';
+    signal R: std_logic := '0';
     
 begin
     x0 : Contador
     	port map(R,clks,P);
-
-    R <= '0';
-    P <= '1';
+    
     
     process
     	begin                  
+    	wait for 50 ns;
+    	R <= not R;
         for i in 0 to 100 loop
             clks <= not clks;
             wait for 50 ns;
         end loop;
         wait;
     end process;
-    
     
 end architecture;

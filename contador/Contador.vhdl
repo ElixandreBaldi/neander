@@ -14,26 +14,26 @@ architecture comp of Contador is
   
     component CCC is
 		port(
-		    Q : in std_logic_vector(4 downto 0);        
-		    K : out  std_logic_vector(4 downto 0);
-		    J : out  std_logic_vector(4 downto 0)       
+		    Q : in std_logic_vector(3 downto 0);        
+		    K : out  std_logic_vector(3 downto 0);
+		    J : out  std_logic_vector(3 downto 0)       
 		);
 	end component;
 	
 	component FF_Contador is
 		port(
-			K : in  std_logic_vector(4 downto 0);
-			J : in  std_logic_vector(4 downto 0);
+			K : in  std_logic_vector(3 downto 0);
+			J : in  std_logic_vector(3 downto 0);
 			R : in std_logic;      
 			CLK : in std_logic;
 			P : in std_logic;
-			B : out std_logic_vector(4 downto 0)
+			B : out std_logic_vector(3 downto 0)
 		);
 	end component;
     
-    signal k : std_logic_vector(4 downto 0);
-	signal j : std_logic_vector(4 downto 0);
-	signal b : std_logic_vector(4 downto 0);  
+    signal k : std_logic_vector(3 downto 0);
+	signal j : std_logic_vector(3 downto 0);
+	signal b : std_logic_vector(3 downto 0) := "0000";  
     
 begin
     x0 : CCC
