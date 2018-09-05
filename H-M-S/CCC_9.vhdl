@@ -1,15 +1,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity CCC is
+entity CCC_9 is
 	port(
         Q : in std_logic_vector(3 downto 0);        
         K : out  std_logic_vector(3 downto 0);
         J : out  std_logic_vector(3 downto 0)       
 	);
-end CCC;
+end CCC_9;
 
-architecture comp of CCC is
+architecture comp of CCC_9 is
     begin
         K(0) <= '1';        
         J(0) <= (not Q(1) and not Q(2)) or not Q(3);

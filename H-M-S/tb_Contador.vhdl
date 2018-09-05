@@ -22,14 +22,13 @@ architecture comp of tb_Contador is
     
 begin
     x0 : Contador
-    	port map(R,clks,P);
-    
+    	port map(R,clks,P);    
     
     process
     	begin                  
     	wait for 50 ns;
     	R <= not R;
-        for i in 0 to 100 loop
+        for i in 0 to 1000 loop
             clks <= not clks;
             wait for 50 ns;
         end loop;
