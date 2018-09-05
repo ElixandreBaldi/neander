@@ -2,13 +2,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity tb_Contador is
+entity tb_Contador_2 is
 --
-end tb_Contador;
+end tb_Contador_2;
 
-architecture comp of tb_Contador is    
+architecture comp of tb_Contador_2 is    
   
-	component Contador is
+	component Contador_2 is
 		port(
 			r : in std_logic;      
 			clk : in std_logic;
@@ -21,9 +21,8 @@ architecture comp of tb_Contador is
     signal R: std_logic := '0';
     
 begin
-    x0 : Contador
-    	port map(R,clks,P);
-    
+    x0 : Contador_2
+    	port map(R,clks,P);    
     
     process
     	begin                  
