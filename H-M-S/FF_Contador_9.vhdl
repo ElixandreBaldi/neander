@@ -4,12 +4,12 @@ use ieee.numeric_std.all;
 
 entity FF_Contador_9 is
 	port(
-		K : in  std_logic_vector(3 downto 0);
-		J : in  std_logic_vector(3 downto 0);
-		R : in std_logic;      
+		K   : in  std_logic_vector(3 downto 0);
+		J   : in  std_logic_vector(3 downto 0);
+		R   : in std_logic;      
 		CLK : in std_logic;
-		P : in std_logic;
-		B : out std_logic_vector(3 downto 0)
+		P   : in std_logic;
+		B   : out std_logic_vector(3 downto 0)
 	);
 end FF_Contador_9;
 
@@ -17,12 +17,12 @@ architecture comp of FF_Contador_9 is
     component FF is
 	    port(
             clk : in  std_logic;
-            J : in  std_logic;
-            K : in  std_logic;
-            PR: in  std_logic;
-            CL: in  std_logic;        
-            Q : out std_logic;
-            Qn : out std_logic
+            J   : in  std_logic;
+            K   : in  std_logic;
+            PR  : in  std_logic;
+            CL  : in  std_logic;        
+            Q   : out std_logic;
+            Qn  : out std_logic
 	    );
     end component;    
     signal bn : std_logic;

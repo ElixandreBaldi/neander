@@ -4,9 +4,10 @@ use ieee.numeric_std.all;
 
 entity Relogio_SS is
 	port(
-		r : in std_logic;      
+        I   : in std_logic;
+		r   : in std_logic;      
 		clk : in std_logic;
-		p : in std_logic;
+		p   : in std_logic;
 		c_9 : out std_logic_vector(3 downto 0);
         c_5 :  out std_logic_vector(2 downto 0)
 	);
@@ -16,21 +17,21 @@ architecture comp of Relogio_SS is
   
     component Contador_5 is
         port(
-            X: in std_logic;
-            r : in std_logic;      
+            X   : in std_logic;
+            r   : in std_logic;      
             clk : in std_logic;
-            p : in std_logic;
-            s : out std_logic_vector(2 downto 0)
+            p   : in std_logic;
+            s   : out std_logic_vector(2 downto 0)
         );
     end component;
 	
     component Contador_9 is
         port(
-            X: in std_logic;
-            r : in std_logic;      
+            X   : in std_logic;
+            r   : in std_logic;      
             clk : in std_logic;
-            p : in std_logic;
-            s : out std_logic_vector(3 downto 0)
+            p   : in std_logic;
+            s   : out std_logic_vector(3 downto 0)
         );
     end component;
 
@@ -47,6 +48,6 @@ begin
     	port map(x,r,clk,p,c_5);
     	
     x3 : Contador_9
-    	port map(pre,r,clk,p,sa);
+    	port map(I,r,clk,p,sa);
     	
 end architecture;

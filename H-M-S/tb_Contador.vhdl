@@ -16,9 +16,9 @@ architecture comp of tb_Contador is
 		);
 	end component;
 
-    signal clks: std_logic := '0';
-    signal P: std_logic := '1';
-    signal R: std_logic := '0';
+    signal clks : std_logic := '0';
+    signal P    : std_logic := '1';
+    signal R    : std_logic := '0';
     
 begin
     x0 : Contador

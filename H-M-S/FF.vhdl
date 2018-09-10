@@ -4,12 +4,12 @@ use ieee.std_logic_1164.all;
 entity FF is
 	port(
         clk : in std_logic;
-        J : in  std_logic;
-        K : in  std_logic;
-        PR: in  std_logic;
-        CL: in  std_logic;        
-        Q : out std_logic;
-        Qn : out std_logic
+        J   : in  std_logic;
+        K   : in  std_logic;
+        PR  : in  std_logic;
+        CL  : in  std_logic;        
+        Q   : out std_logic;
+        Qn  : out std_logic
 	);
 end FF;
 
