@@ -4,9 +4,12 @@ use ieee.numeric_std.all;
 
 entity Contador_2 is
 	port(
-		r   : in std_logic;      
-		clk : in std_logic;
-		p   : in std_logic
+        X   : in std_logic;
+        r   : in std_logic;      
+        clk : in std_logic;
+        p   : in std_logic;
+        s   : out std_logic_vector(1 downto 0)
+		
 	);
 end Contador_2;
 
@@ -14,6 +17,7 @@ architecture comp of Contador_2 is
   
     component CCC_2 is
 		port(
+            X : in std_logic;
 		    Q : in std_logic_vector(1 downto 0);        
 		    K : out  std_logic_vector(1 downto 0);
 		    J : out  std_logic_vector(1 downto 0)       
@@ -36,8 +40,9 @@ architecture comp of Contador_2 is
 	signal b : std_logic_vector(1 downto 0) := "00";  
     
 begin
+    s <= b;
     x0 : CCC_2
-    	port map(b,k,j);
+    	port map(X,b,k,j);
     	
     x1 : FF_Contador_2
     	port map(k,j,r,clk,p,b);
