@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity Relogio_MM_SS is
+entity Relogio_HH_MM_SS is
 	port(
 		I   : in std_logic;
 		r   : in std_logic;      
@@ -11,9 +11,11 @@ entity Relogio_MM_SS is
 		c_9_s :  out std_logic_vector(3 downto 0);
         c_5_s :  out std_logic_vector(2 downto 0);
 		c_9_m :  out std_logic_vector(3 downto 0);
-        c_5_m :  out std_logic_vector(2 downto 0)
+        c_5_m :  out std_logic_vector(2 downto 0);
+        c_9_h :  out std_logic_vector(3 downto 0);
+        c_5_h :  out std_logic_vector(2 downto 0)
 	);
-end Relogio_MM_SS;
+end Relogio_HH_MM_SS;
 
 architecture comp of Relogio_MM_SS is    
   

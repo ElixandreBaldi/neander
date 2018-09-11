@@ -41,13 +41,14 @@ architecture comp of Relogio_SS is
 	
 begin
     
-    x <= sa(0) and sa(3);
-    c_9 <= sa;
+        
 
-    x0 : Contador_5
-    	port map(x,r,clk,p,c_5);
-    	
-    x3 : Contador_9
+    x0 : Contador_9
     	port map(I,r,clk,p,sa);
+    c_9 <= sa;
+    x <= sa(0) and sa(3) and I;
+    x1 : Contador_5
+    	port map(x,r,clk,p,c_5);
+    	    
     	
 end architecture;
