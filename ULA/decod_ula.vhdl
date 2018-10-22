@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity decod_ula is
 	port(
         sel :  in std_logic_vector(2 downto 0);
-        p_  :  in std_logic_vector(7 downto 0)
+        p_  :  in std_logic_vector(5 downto 0)
 	);
 end decod_ula;
 

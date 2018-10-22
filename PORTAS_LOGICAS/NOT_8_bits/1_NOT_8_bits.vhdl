@@ -19,9 +19,3 @@ architecture comp of porta_NOT_8in is
             s(6) <= not a(6);
             s(7) <= not a(7);
 end architecture;
-
-
-
-
-
-
