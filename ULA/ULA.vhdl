@@ -9,13 +9,10 @@ entity ULA is
         sel     : in  std_logic_vector(2 downto 0);
         s       : out std_logic_vector(7 downto 0);
           
-        n       : out std_logic;
-        z       : out std_logic;
+        nz      : out std_logic_vector(1 downto 0);
 
         clock   : in std_logic;
-
-        sn: out std_logic;
-        sz: out std_logic;
+        clear   : in std_logic;
 
         cargaAC : out std_logic
 	);
@@ -85,6 +82,18 @@ architecture comp of ULA is
                 );
         end component;
 
+        component REG_2_bits is
+            port(
+                clk : in  std_logic;
+                cl  : in  std_logic;
+                pr  : in  std_logic;
+                c   : in  std_logic;
+                b   : in  std_logic_vector(1 downto 0);
+                s   : out std_logic_vector(1 downto 0)
+            );
+        end component; 
+    
+
         signal p  : std_logic_vector(5 downto 0);
         signal s_not : std_logic_vector(7 downto 0);
         signal s_shift : std_logic_vector(7 downto 0);
@@ -93,8 +102,7 @@ architecture comp of ULA is
         signal s_and : std_logic_vector(7 downto 0);
         signal ts_add : std_logic;
 
-        signal cc_n : std_logic;
-        signal cc_z : std_logic;
+        signal cc_nz : std_logic;
 
         begin
                 --seletor
@@ -137,26 +145,11 @@ architecture comp of ULA is
                 port map(cx ,cy ,s_and);
 
                 cc_ : CC_NZ
-                port map(s , cc_n , cc_z);
+                port map(s , cc_nz);
 
-                
+                reg_ : REG_2_bits
+                port map(clock, clear,'1', cargaAC, cc_nz, nz);
 
-             x1 : porta_OR_2in 
-             port map(a(1),b(1),s(1));
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 end architecture;
 
 
