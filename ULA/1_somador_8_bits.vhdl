@@ -11,7 +11,7 @@ entity somador_8_bits is
    );
 end entity;
 
-architecture comp of porta_AND_8in is
+architecture comp of somador_8_bits is
    component meio_somador is
       port(
           a  : in std_logic;
@@ -22,7 +22,7 @@ architecture comp of porta_AND_8in is
       );
   end component;
    
-   signal t std_logic_vector(6 downto 0);
+   signal t : std_logic_vector(6 downto 0);
 
    begin
       x0 : meio_somador

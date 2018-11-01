@@ -14,7 +14,7 @@ entity ULA is
         clock   : in std_logic;
         clear   : in std_logic;
 
-        cargaAC : out std_logic
+        cargaAC : in std_logic
 	);
 end ULA;
 
@@ -22,15 +22,14 @@ architecture comp of ULA is
         component CC_NZ is
                 port(
                 E   :  in  std_logic_vector(7 downto 0);
-                N   :  out std_logic;
-                Z   :  out std_logic
+                NZ  :  out std_logic_vector(1 downto 0)
                 );
         end component;
 
         component decod_ula is
                 port(
                 sel :  in std_logic_vector(2 downto 0);
-                p_  :  in std_logic_vector(5 downto 0)
+                p  :  out std_logic_vector(5 downto 0)
                 );
         end component;
 
@@ -101,54 +100,56 @@ architecture comp of ULA is
         signal s_or : std_logic_vector(7 downto 0);
         signal s_and : std_logic_vector(7 downto 0);
         signal ts_add : std_logic;
-
-        signal cc_nz : std_logic;
+        signal ss : std_logic_vector(7 downto 0);
+        signal scc_nz : std_logic_vector(1 downto 0);     
 
         begin
                 --seletor
-                sel : decod_ula
+                sel2 : decod_ula
                 port map (sel,p);
 
                 --blocks
                 block_not : block_8_bits
-                port map(s_not,p(0),s);
+                port map(s_not,p(0),ss);
 
                 block_shift : block_8_bits
-                port map(s_shift,p(1),s);
+                port map(s_shift,p(1),ss);
 
                 block_add : block_8_bits
-                port map(s_add,p(2),s);
+                port map(s_add,p(2),ss);
 
                 block_or : block_8_bits
-                port map(s_or,p(3),s);
+                port map(s_or,p(3),ss);
 
                 block_and : block_8_bits
-                port map(s_and,p(4));
+                port map(s_and,p(4),ss);
 
                 block_load : block_8_bits
-                port map(cy,p(5),s);
+                port map(cx,p(5),ss);
                 
+                s <= ss;
+
                 --components
-                not_ : porta_NOT_8in
+                not2: porta_NOT_8in
                 port map(cy,s_not);
 
-                shift_ : shiftL_8_bits
+                shift: shiftL_8_bits
                 port map(cy , s_shift);
 
-                add_ : somador_8_bporta_AND_8in
-                port map(cx,cy,'1',ts_add);
+                add2: somador_8_bits
+                port map(cx,cy,'1',s_add,ts_add);
 
-                or_ : porta_OR_8
-                port map(cx ,cy s_or);
+                or2: porta_OR_8in
+                port map(cx ,cy ,s_or);
 
-                and_ : porta_AND_8in
+                and2: porta_AND_8in
                 port map(cx ,cy ,s_and);
 
-                cc_ : CC_NZ
-                port map(s , cc_nz);
+                cc: CC_NZ
+                port map(ss , scc_nz);
 
-                reg_ : REG_2_bits
-                port map(clock, clear,'1', cargaAC, cc_nz, nz);
+                reg: REG_2_bits
+                port map(clock, clear,'1', cargaAC, scc_nz, nz);                
 
 end architecture;
 

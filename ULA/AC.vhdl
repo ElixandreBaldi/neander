@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity REG is
+entity AC is
     port(
         clk : in  std_logic;
         cl  : in  std_logic;
@@ -10,9 +10,9 @@ entity REG is
         b   : in  std_logic_vector(7 downto 0);
         s   : out std_logic_vector(7 downto 0)
     );
-end REG;
+end AC;
 
-architecture comp of REG is
+architecture comp of AC is
     component mux2x1 is
         port(
             S : in  std_logic;

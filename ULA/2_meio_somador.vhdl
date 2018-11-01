@@ -11,7 +11,7 @@ entity meio_somador is
     );
 end entity;
 
-architecture comp of porta_and_2in is
+architecture comp of meio_somador is
    signal st, x1, x2, x3 : std_logic;  
    begin
       st <= a xor b;
@@ -23,4 +23,4 @@ architecture comp of porta_and_2in is
       ---
       ts <= (x1 or x2) or x3;
 
-end architecture comp;
+end architecture comp; 

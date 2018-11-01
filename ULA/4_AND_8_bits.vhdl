@@ -9,7 +9,7 @@ entity porta_AND_8in is
 	);
 end porta_AND_8in;
 
-architecture comp of porta_AND_8in is
+architecture compi of porta_AND_8in is
         component porta_and_2in is
                 port(
                         a : in std_logic;

@@ -12,4 +12,4 @@ end entity;
 architecture comp of porta_and_2in is
     begin
         s <= a and b;
-end architecture comp;
+end architecture;

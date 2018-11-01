@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity CC_NZ is
 	port(
         E   :  in  std_logic_vector(7 downto 0);
-        NZ  :  out std_logic_vector(1 downto 0);
+        NZ  :  out std_logic_vector(1 downto 0)
 	);
 end CC_NZ;
 
