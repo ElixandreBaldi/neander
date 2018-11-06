@@ -33,11 +33,11 @@ architecture comp of ULA is
                 );
         end component;
 
-        component porta_AND_8in is
+        component AND_8_bit is
                 port(
-                a : in std_logic_vector(7 downto 0);
-                b : in std_logic_vector(7 downto 0);
-                s : out std_logic_vector(7 downto 0)
+                        a : in std_logic_vector(7 downto 0);
+                        b : in std_logic_vector(7 downto 0);
+                        sand : out std_logic_vector(7 downto 0)
                 );
         end component;
 
@@ -71,13 +71,13 @@ architecture comp of ULA is
                 );
         end component;
 
-        component somador_8_bits is
+        component adder_8_bit is
                 port(
-                   a  : in std_logic_vector(7 downto 0);
-                   b  : in std_logic_vector(7 downto 0);
-                   te : in std_logic;
-                   s  : out std_logic_vector(7 downto 0);
-                   ts : out std_logic
+                        a : in std_logic_vector(7 downto 0);
+                        b : in std_logic_vector(7 downto 0);
+                        te :in std_logic;
+                        s : out std_logic_vector(7 downto 0);
+                        ts : out std_logic
                 );
         end component;
 
@@ -136,13 +136,13 @@ architecture comp of ULA is
                 shift: shiftL_8_bits
                 port map(cy , s_shift);
 
-                add2: somador_8_bits
-                port map(cx,cy,'1',s_add,ts_add);
+                add2: adder_8_bit
+                port map(cx,cy,'0',s_add,ts_add);
 
                 or2: porta_OR_8in
                 port map(cx ,cy ,s_or);
 
-                and2: porta_AND_8in
+                and2: AND_8_bit
                 port map(cx ,cy ,s_and);
 
                 cc: CC_NZ

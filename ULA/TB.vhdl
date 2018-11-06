@@ -45,10 +45,10 @@ begin
         begin
             wait for 50 ns;
             clear <= '1';
+            
             for i in 0 to 5 loop
-                cx <= std_logic_vector(to_unsigned(10,cx'length));
-
-                cy <= std_logic_vector(to_unsigned(1,cy'length));
+                cx <= std_logic_vector(to_unsigned(2,cx'length));
+                cy <= std_logic_vector(to_unsigned(3,cy'length));
                 sel <= std_logic_vector(to_unsigned(i,sel'length));
                 
                 wait for 50 ns;

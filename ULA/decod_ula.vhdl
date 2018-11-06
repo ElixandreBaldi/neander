@@ -10,11 +10,10 @@ end decod_ula;
 
 architecture comp of decod_ula is
     begin
-        p(0) <= sel(0)       and (not sel(1))   and (not sel(2));
-        p(1) <= sel(0)       and (not sel(1))   and sel(2);
-        p(2) <= (not sel(0)) and (not sel(1))   and sel(2);
-        p(3) <= (not sel(0)) and  sel(1)        and (not sel(2));
-        p(4) <= ((not sel(0)) and sel(1))        and sel(2);
-        p(5) <= (not sel(0)) and (not sel(1))   and (not sel(2));
-
+        p(0) <= sel(2)       and (not sel(1))   and (not sel(0));
+        p(1) <= sel(2)       and (not sel(1))   and      sel(0);
+        p(2) <= (not sel(2)) and (not sel(1))   and      sel(0);
+        p(3) <= (not sel(2)) and      sel(1)    and (not sel(0));
+        p(4) <= (not sel(2)) and sel(1)         and      sel(0);
+        p(5) <= (not sel(2)) and (not sel(1))   and (not sel(0));
 end architecture;
