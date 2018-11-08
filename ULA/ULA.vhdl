@@ -149,7 +149,7 @@ architecture comp of ULA is
                 port map(ss , scc_nz);
 
                 reg: REG_2_bits
-                port map(clock, clear,'1', cargaAC, scc_nz, nz);                
+                port map(clock, clear,'0', cargaAC, scc_nz, nz);                
 
 end architecture;
 

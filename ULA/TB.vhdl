@@ -27,9 +27,6 @@ architecture comp of tb is
         signal sel : std_logic_vector(2 downto 0);
         signal nz : std_logic_vector(1 downto 0);
         signal clk,clear,cAC : std_logic:= '0';
-
-
-
 begin
     x0: ULA
     port map(cy,cx,sel,s,nz,clk,clear,cAC);
@@ -45,12 +42,12 @@ begin
         begin
             wait for 50 ns;
             clear <= '1';
-            
+            cAC <= '0';
             for i in 0 to 5 loop
                 cx <= std_logic_vector(to_unsigned(2,cx'length));
                 cy <= std_logic_vector(to_unsigned(3,cy'length));
                 sel <= std_logic_vector(to_unsigned(i,sel'length));
-                
+                cAC <= (not cAC);
                 wait for 50 ns;
 
             end loop;
