@@ -43,7 +43,6 @@ begin
     x1 : mux2x1
     port map(c, b(1), ss(1), m(1));
   
-    
 
     y0 : FFJKD
     port map(m(0), clk, pr, cl, ss(0), nq(0));

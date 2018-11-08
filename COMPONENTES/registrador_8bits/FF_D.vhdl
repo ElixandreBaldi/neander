@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity FF_D is
 	port(
-        clk : in std_logic;
         D : in  std_logic;        
+        clk : in std_logic;
         PR: in  std_logic;
         CL: in  std_logic;        
         Q : out std_logic;
