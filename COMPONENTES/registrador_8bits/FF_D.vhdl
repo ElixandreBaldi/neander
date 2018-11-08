@@ -30,7 +30,7 @@ architecture comp of FF_D is
         sk1 <= not(not D and clk and sj4);
         sk2 <= not(sj2 and sk1 and CL);
         sk3 <= not(not(clk) and sk2);
-        sk4 <= not(sj4 and sk3 and CL);
+        sk4 <= not(sj4 andREM_ sk3 and CL);
 
         Q <= sj4;
         Qn <= sk4;

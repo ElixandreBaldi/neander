@@ -30,5 +30,3 @@ begin
     Q <= A(3);
     nQ <= B(3);
 end architecture;
-
-
