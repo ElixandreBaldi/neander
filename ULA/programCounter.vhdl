@@ -52,7 +52,7 @@ architecture comp of PC is
         um <= std_logic_vector(to_unsigned(1,um'length));
         
         x1 : multiplex_2_8
-        port map(barr,S_inc,inc_PC,S_mux);
+        port map(barr,"00000001",inc_PC,S_mux);
 
         x2 : AC
         port map(clk,cl,'1',c_PC,S_mux,saida);
