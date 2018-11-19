@@ -43,20 +43,16 @@ architecture comp of PC is
             ts : out std_logic
         );
     end component;
-        signal  S_mux,saida : std_logic_vector(7 downto 0);
-        signal  S_inc : std_logic_vector(7 downto 0);
-        signal  tsaida : std_logic;
-        signal um : std_logic_vector(7 downto 0);
-    begin
-
-        um <= std_logic_vector(to_unsigned(1,um'length));
+        signal  S_mux,saida_AC : std_logic_vector(7 downto 0);        
+        signal  tsaida : std_logic;        
+    begin        
         
         x1 : multiplex_2_8
         port map(barr,"00000001",inc_PC,S_mux);
 
         x2 : AC
-        port map(clk,cl,'1',c_PC,S_mux,saida);
+        port map(clk,cl,'1',c_PC,S_mux,saida_AC);
 
         x3 : somador_8_bits
-        port map("00000001",saida,'0',S_inc,tsaida);    
+        port map("00000001",saida_AC,'0',s,tsaida);
 end comp;

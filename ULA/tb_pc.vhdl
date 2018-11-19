@@ -43,9 +43,9 @@ architecture comp of tbPc is
 
         U_TBPC: process
             begin
+                wait for 50 ns;
                 cl <= '1';
                 
-                wait for 50 ns;
                 for i in 0 to 5 loop
                     wait for 50 ns;
                 end loop;
