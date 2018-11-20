@@ -90,7 +90,7 @@ architecture comp of ULA is
                 b   : in  std_logic_vector(1 downto 0);
                 s   : out std_logic_vector(1 downto 0)
             );
-        end component; 
+        end component;
     
 
         signal p  : std_logic_vector(5 downto 0);
@@ -101,9 +101,10 @@ architecture comp of ULA is
         signal s_and : std_logic_vector(7 downto 0);
         signal ts_add : std_logic;
         signal ss : std_logic_vector(7 downto 0);
-        signal scc_nz : std_logic_vector(1 downto 0);     
+        signal scc_nz : std_logic_vector(1 downto 0);               
 
         begin
+            
                 --seletor
                 sel2 : decod_ula
                 port map (sel,p);
@@ -148,15 +149,6 @@ architecture comp of ULA is
                 cc: CC_NZ
                 port map(ss , scc_nz);
 
-                reg: REG_2_bits
-                port map(clock, clear,'1', cargaAC, scc_nz, nz);                
-
+                regs: REG_2_bits
+                port map(clock, clear, '1', cargaAC, scc_nz, nz);      
 end architecture;
-
-
-
-
-
-
-
-

@@ -34,19 +34,22 @@ architecture comp of REG_2_bits is
     end component;
     
     signal m  : std_logic_vector(1 downto 0);
-    signal ss : std_logic_vector(1 downto 0);
+    signal ss : std_logic_vector(1 downto 0):="00";
     signal nq : std_logic_vector(1 downto 0);
+    signal nb : std_logic_vector(1 downto 0);
 
 begin
-    x0 : mux2x1
-    port map(c, b(0), ss(0), m(0));
-    x1 : mux2x1
-    port map(c, b(1), ss(1), m(1));
-  
+    nb <= b;
 
+    x0 : mux2x1
+    port map(c, nb(0), ss(0), m(0));
+    x1 : mux2x1
+    port map(c, nb(1), ss(1), m(1));
+    
     y0 : FFJKD
     port map(m(0), clk, pr, cl, ss(0), nq(0));
     s(0) <= ss(0);
+    
     y1 : FFJKD
     port map(m(1), clk, pr, cl, ss(1), nq(1));
     s(1) <= ss(1);

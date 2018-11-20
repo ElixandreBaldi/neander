@@ -26,10 +26,11 @@ architecture comp of tb is
         signal cy,cx,s : std_logic_vector(7 downto 0);
         signal sel : std_logic_vector(2 downto 0);
         signal nz : std_logic_vector(1 downto 0);
-        signal clk,clear,cAC : std_logic:= '0';
+        signal clk,cl : std_logic:= '0';
+        signal cAC : std_logic:= '1';
 begin
     x0: ULA
-    port map(cy,cx,sel,s,nz,clk,clear,cAC);
+    port map(cy,cx,sel,s,nz,clk,cl,cAC);
 
     U_CLOCK: process
     begin
@@ -41,15 +42,14 @@ begin
     U_TBREG: process
         begin
             wait for 50 ns;
-            clear <= '1';
+            cl <= '1';
             cAC <= '0';
+            
             for i in 0 to 5 loop
                 cx <= std_logic_vector(to_unsigned(2,cx'length));
                 cy <= std_logic_vector(to_unsigned(3,cy'length));
-                sel <= std_logic_vector(to_unsigned(i,sel'length));
-                cAC <= (not cAC);
+                sel <= std_logic_vector(to_unsigned(i,sel'length));                
                 wait for 50 ns;
-
             end loop;
 
 
