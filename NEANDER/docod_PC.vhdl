@@ -10,16 +10,16 @@ end decod_UC;
 
 architecture comp of decod_UC is
     begin
-        s(0)  <= (not(p(0) or p(1) or p(2) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(1)  <= p(0) and (not(p(1) or p(2) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(2)  <= p(1) and (not(p(0) or p(2) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(3)  <= p(1) and p(0) and (not(p(2) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(4)  <= p(2) and (not(p(0) or p(1) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(5)  <= p(2) and p(0) and (not(p(1) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(6)  <= p(2) and p(1) and (not(p(0) or p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(7)  <= p(2) and p(1) and p(0) and (not(p(3) or p(4) or p(5) or p(6) or p(7)));
-        s(8)  <= p(3) and (not(p(0) or p(1) or p(2) or p(4) or p(5) or p(6) or p(7)));
-        s(9)  <= p(3) and p(0) and (not(p(1) or p(2) or p(4) or p(5) or p(6) or p(7)));
-        s(10) <= p(3) and p(1) and (not(p(0) or p(2) or p(4) or p(5) or p(6) or p(7)));
-        s(11) <= p(3) and p(2) and (not(p(0) or p(1) or p(4) or p(5) or p(6) or p(7)));
+        s(0)   <= (not(p(4) or p(5) or p(6) or p(7)));
+        s(1)   <= p(4) and (not(p(5) or p(6) or p(7)));
+        s(2)   <= p(5) and (not(p(4) or p(6) or p(7)));
+        s(3)   <= p(4) and p(5) and (not(p(6) or p(7)));
+        s(4)   <= p(6) and (not(p(4) or p(5) or p(7)));
+        s(5)   <= p(6) and p(4) and (not(p(5) or p(7)));
+        s(6)   <= p(6) and p(5) and (not(p(4) or p(7)));
+        s(7)   <= p(4) and p(5) and p(6) and (not p(7));
+        s(8)   <= p(7) and (not(p(4) and p(5) or p(6)));
+        s(9)   <= p(7) and p(4) and (not(p(5) or p(6)));
+        s(10)  <= p(7) and p(5) and (not(p(4) or p(6)));
+        s(11)  <= p(4) and p(5) and p(6) and p(7);
 end architecture;
