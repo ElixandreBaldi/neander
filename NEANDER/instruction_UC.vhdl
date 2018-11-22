@@ -61,9 +61,12 @@ architecture comp of lda is
         sel_mux <= (b(0) xor b(2)) or b(3) or b(1);
         c_rem <= b(3) or b(2) or b(0);
         r_notW <= '1';
-        c_rdm <= not(b(0) xor b(2)) or (not(b(1) and b(0))) or b(3);
+        c_rdm <= ((not b(2)) and ((not b(3) and (not b(0))) or (b(3) and (not b(1))))) or ((not b(3) and b(2)) and (b(0) or (not b(1))));
         bloqueios <= '1';
         c_ri <= b(3) or (not((b(1)))) or (not(b(0))) or (not(b(2)));
         c_ac <= b(3) or (not(b(2))) or b(1) or b(0);
         sel_ula <= "000";
 end architecture;
+
+
+-- RDM (b(0) xor b(2)) or (not(b(1) and b(0))) or b(3);

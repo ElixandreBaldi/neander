@@ -18,7 +18,7 @@ architecture comp of decod_UC is
         s(5)   <= p(6) and p(4) and (not(p(5) or p(7)));
         s(6)   <= p(6) and p(5) and (not(p(4) or p(7)));
         s(7)   <= p(4) and p(5) and p(6) and (not p(7));
-        s(8)   <= p(7) and (not(p(4) and p(5) or p(6)));
+        s(8)   <= p(7) and (not(p(4) or p(5) or p(6)));
         s(9)   <= p(7) and p(4) and (not(p(5) or p(6)));
         s(10)  <= p(7) and p(5) and (not(p(4) or p(6)));
         s(11)  <= p(4) and p(5) and p(6) and p(7);
