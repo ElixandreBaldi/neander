@@ -31,7 +31,7 @@ architecture comp of UC is
         );
     end component;
     
-    component SHIFT is
+    component ANDs is
         port(
             b: in std_logic_vector(3 downto 0);        
             c_ac :      out std_logic;
@@ -54,7 +54,7 @@ architecture comp of UC is
     contador: Contador_9
         port map(cl,clk,'1',ss);
         
-        SHIFTs : SHIFT
+        ANDss : ANDs
         port map(ss,c_ac,sel_ula,c_PC,sel_PC,sel_mux, c_rem, c_rdm,bloqueios,r_notW,c_ri);
         
         
