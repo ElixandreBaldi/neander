@@ -21,7 +21,7 @@ end nop;
 architecture comp of nop is
     begin
         c_PC <= b(3) or b(2) or b(1) or (not (b(0)));
-        sel_pc <= '0';
+        sel_pc <= '1';
         sel_mux <= '0';
         c_rem <= b(3) or b(2) or b(1) or b(0);
         r_notW <= '1';
@@ -90,7 +90,7 @@ end STA;
 architecture comp of STA is
     begin
         c_PC <= b(3) or ((not b(1)) and b(2)) or ((not b(0)) and (not b(2)) and (not b(3))) or ( (not b(3)) and b(1) and b(0));
-        sel_pc <= b(2);
+        sel_pc <= '1';
         sel_mux <= b(1);
         c_rem <= b(3) or b(2) or b(0);
         r_notW <= b(1) or (b(0) and (not b(3)));
