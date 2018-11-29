@@ -158,6 +158,22 @@ architecture comp of UC is
         );
     end component;
     
+    component JUMP is
+        port(
+            b: in std_logic_vector(3 downto 0);        
+            c_ac :      out std_logic;
+            sel_ula:    out std_logic_vector(2 downto 0);
+            c_PC:       out std_logic;
+            sel_PC:     out std_logic;
+            sel_mux :   out std_logic;
+            c_rem :     out std_logic;
+            c_rdm  :    out std_logic;
+            bloqueios : out std_logic;
+            r_notW :    out std_logic;
+            c_ri :      out std_logic        
+        );
+    end component;
+    
     component bloqUC is
         port(       
             c_ac :      in std_logic;
@@ -186,6 +202,24 @@ architecture comp of UC is
         );
     end component;
     
+    component HLT is
+        port(
+            b: in std_logic_vector(3 downto 0);        
+            c_ac :      out std_logic;
+            sel_ula:    out std_logic_vector(2 downto 0);
+            c_PC:       out std_logic;
+            sel_PC:     out std_logic;
+            sel_mux :   out std_logic;
+            c_rem :     out std_logic;
+            c_rdm  :    out std_logic;
+            bloqueios : out std_logic;
+            r_notW :    out std_logic;
+            c_ri :      out std_logic        
+        );
+    end component;
+    
+    signal ss      :      std_logic_vector(3 downto 0);
+    
     signal or_c_ac :      std_logic;
     signal or_sel_ula:    std_logic_vector(2 downto 0);
     signal or_c_PC:       std_logic;
@@ -196,6 +230,17 @@ architecture comp of UC is
     signal or_bloqueios : std_logic;
     signal or_r_notW :    std_logic;
     signal or_c_ri :      std_logic;
+    
+    signal shift_c_ac :      std_logic;
+    signal shift_sel_ula:    std_logic_vector(2 downto 0);
+    signal shift_c_PC:       std_logic;
+    signal shift_sel_PC:     std_logic;
+    signal shift_sel_mux :   std_logic;
+    signal shift_c_rem :     std_logic;
+    signal shift_c_rdm  :    std_logic;
+    signal shift_bloqueios : std_logic;
+    signal shift_r_notW :    std_logic;
+    signal shift_c_ri :      std_logic;
     
     signal nop_c_ac :      std_logic;
     signal nop_sel_ula:    std_logic_vector(2 downto 0);
@@ -307,10 +352,17 @@ architecture comp of UC is
     signal hlt_r_notW :    std_logic;
     signal hlt_c_ri :      std_logic;
     
+    signal p_n      :      std_logic;
+    signal p_z      :      std_logic;
+    
+    
     begin
     
     contador: Contador_9
         port map(cl,clk,'1',ss);
+        
+    HLTs : HLT
+        port map(ss,hlt_c_ac,hlt_sel_ula,hlt_c_PC,hlt_sel_PC,hlt_sel_mux,hlt_c_rem,hlt_c_rdm,hlt_bloqueios,hlt_r_notW,hlt_c_ri);
         
     NOPs : nop
         port map(ss,nop_c_ac,nop_sel_ula,nop_c_PC,nop_sel_PC,nop_sel_mux,nop_c_rem,nop_c_rdm,bloqueios,nop_r_notW,nop_c_ri);
@@ -328,13 +380,25 @@ architecture comp of UC is
         port map(ss,shift_c_ac,shift_sel_ula,shift_c_PC,shift_sel_PC,shift_sel_mux,shift_c_rem,shift_c_rdm,shift_bloqueios,shift_r_notW,shift_c_ri);
         
     ANDss : ANDs
-        port map(ss,and_c_ac,and_sel_ula,and_c_PC,and_and_sel_PC,and_sel_mux,and_c_rem,and_c_rdm,and_bloqueios,and_r_notW,and_c_ri);
+        port map(ss,and_c_ac,and_sel_ula,and_c_PC,and_sel_PC,and_sel_mux,and_c_rem,and_c_rdm,and_bloqueios,and_r_notW,and_c_ri);
         
     ADDs : ADD
         port map(ss,add_c_ac,add_sel_ula,add_c_PC,add_sel_PC,add_sel_mux,add_c_rem,add_c_rdm,add_bloqueios,add_r_notW,add_c_ri);
         
     ORss : ORs
-        port map(or_ss,or_c_ac,or_sel_ula,or_c_PC,or_sel_PC,or_sel_mux,or_c_rem,or_c_rdm,or_bloqueios,or_r_notW,or_c_ri);
+        port map(ss,or_c_ac,or_sel_ula,or_c_PC,or_sel_PC,or_sel_mux,or_c_rem,or_c_rdm,or_bloqueios,or_r_notW,or_c_ri);
+        
+    JUMPs : JUMP
+        port map(ss,jmp_c_ac,jmp_sel_ula,jmp_c_PC,jmp_sel_PC,jmp_sel_mux,jmp_c_rem,jmp_c_rdm,jmp_bloqueios,jmp_r_notW,jmp_c_ri);
+        
+    JNs : JUMP
+        port map(ss,jn_c_ac,jn_sel_ula,jn_c_PC,jn_sel_PC,jn_sel_mux,jn_c_rem,jn_c_rdm,jn_bloqueios,jn_r_notW,jn_c_ri);
+        
+    JZs : JUMP
+        port map(ss,jz_c_ac,jz_sel_ula,jz_c_PC,jz_sel_PC,jz_sel_mux,jz_c_rem,jz_c_rdm,jz_bloqueios,jz_r_notW,jz_c_ri);
+        
+    p_n <= inst(8) and nz(0);
+    p_z <= inst(9) and nz(1);
         
         
     BLOCK_NOP : bloqUC
@@ -371,11 +435,11 @@ architecture comp of UC is
                  
     BLOCK_JN : bloqUC
         port map(jn_c_ac,jn_sel_ula,jn_c_PC,jn_sel_PC,jn_sel_mux,jn_c_rem,jn_c_rdm,jn_bloqueios,jn_r_notW,jn_c_ri,
-                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(8));
+                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,p_n);
                  
     BLOCK_JZ : bloqUC
         port map(jz_c_ac,jz_sel_ula,jz_c_PC,jz_sel_PC,jz_sel_mux,jz_c_rem,jz_c_rdm,jz_bloqueios,jz_r_notW,jz_c_ri,
-                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(9));
+                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,p_z);
                  
     BLOCK_HLT : bloqUC
         port map(hlt_c_ac,hlt_sel_ula,hlt_c_PC,hlt_sel_PC,hlt_sel_mux,hlt_c_rem,hlt_c_rdm,hlt_bloqueios,hlt_r_notW,hlt_c_ri,

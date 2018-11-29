@@ -3,8 +3,10 @@ use ieee.std_logic_1164.all;
 
 
 entity neander is
-
-
+    port(
+        clk : in std_logic;
+        cl  : in std_logic
+    );
 end entity;
 
 architecture comp of neander is
@@ -41,16 +43,6 @@ architecture comp of neander is
         );
     end component;
 
-    
-    component as_ram is
-        port(
-            addr  : in    std_logic_vector(7 downto 0);
-            data  : inout std_logic_vector(7 downto 0);
-            rnotw : in    std_logic;
-            notcs : in    std_logic
-        );
-    end component;
-    
     component multiplex_2_8 is
         port(
             a : in  std_logic_vector(7 downto 0);
@@ -78,9 +70,37 @@ architecture comp of neander is
         );
     end component;
     
-    signal C_pc , C_rem , C_rdm , C_ac , C_ir , Sel , selPCpp , r_not , blk, blkn, clk , cl : std_logic;
+    component UC is
+        port(        
+        inst : in std_logic_vector(11 downto 0);
+        clk  : in std_logic;
+        cl   : in std_logic;
+        nz   : in std_logic_vector(1 downto 0);
+        c_ac :      out std_logic;
+        sel_ula:    out std_logic_vector(2 downto 0);
+        c_PC:       out std_logic;
+        sel_PC:     out std_logic;
+        sel_mux :   out std_logic;
+        c_rem :     out std_logic;
+        c_rdm  :    out std_logic;
+        bloqueios : out std_logic;
+        r_notW :    out std_logic;
+        c_ri :      out std_logic
+        );
+    end component;
     
-    signal B0,B1, B2, B3, B4, B5, B6, B7, B8 : std_logic_vector( 7 downto 0);
+    component as_ram is
+        port(
+            addr  : in    std_logic_vector(7 downto 0);
+            data  : inout std_logic_vector(7 downto 0);
+            rnotw : in    std_logic;
+            notcs : in    std_logic
+        );
+    end component;
+    
+    signal C_pc , C_rem , C_rdm , C_ac , C_ir , Sel , selPCpp , r_not , blk, blkn : std_logic;
+    
+    signal B0,B1, B2, B3, B4, B5, B6, B7, B8 : std_logic_vector( 7 downto 0) := "00000000";
     
     signal sel_ULA : std_logic_vector( 2 downto 0); 
     
@@ -90,10 +110,16 @@ architecture comp of neander is
     
     begin
     
+    RAM : as_ram
+        port map(B3 , B1 , r_not , '0');
+    
+    pcs : UC
+        port map(cmds , clk , cl , NZ , C_ac , sel_ULA , C_PC , selPCpp , sel , C_rem , C_rdm , blk , r_not , C_ir);
+    
     ulas : ULA
         port map(B7, B0, sel_ULA, B6 , NZ , clk , cl, C_ac);
         
-    pcs : PC
+    PCss : PC
         port map(clk , cl , B0 , selPCpp , C_pc , B5);
         
     acs : REG
