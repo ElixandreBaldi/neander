@@ -1,0 +1,33 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Fri Nov 30 16:13:03 2018
+[*]
+[dumpfile] "/home/elixandre/Documents/neander/NEANDER/out.ghw"
+[dumpfile_mtime] "Fri Nov 30 16:10:11 2018"
+[dumpfile_size] 2392427
+[savefile] "/home/elixandre/Documents/neander/NEANDER/nomequalquer.gtkw"
+[timestart] 0
+[size] 1440 835
+[pos] -437 -232
+*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.tb_neander.
+[sst_width] 194
+[signals_width] 86
+[sst_expanded] 1
+[sst_vpaned_height] 231
+@28
+top.tb_neander.neanders.c_pc
+top.tb_neander.neanders.sel
+top.tb_neander.neanders.selpcpp
+top.tb_neander.neanders.sel
+top.tb_neander.neanders.c_ac
+top.tb_neander.neanders.selpcpp
+top.tb_neander.neanders.c_rdm
+top.tb_neander.neanders.c_pc
+top.tb_neander.neanders.selpcpp
+top.tb_neander.neanders.c_ac
+@29
+top.tb_neander.neanders.c_rdm
+[pattern_trace] 1
+[pattern_trace] 0

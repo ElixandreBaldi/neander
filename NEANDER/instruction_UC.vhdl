@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+
 entity nop is
 	port(
         b: in std_logic_vector(3 downto 0);        
@@ -18,26 +19,40 @@ entity nop is
 end nop;
 
 
-architecture comp of nop is
-    begin
-        c_PC <= b(3) or b(2) or b(1) or (not (b(0)));
-        sel_pc <= '1';
-        sel_mux <= '0';
-        c_rem <= b(3) or b(2) or b(1) or b(0);
-        r_notW <= '1';
-        c_rdm <= b(3) or b(2) or b(1) or (not (b(0)));
-        bloqueios <= '1';
-        c_ri <= b(3) or b(2) or (not (b(1))) or b(0);
-        c_ac <= '1';
-        sel_ula <= "000";
-end architecture;
 
+architecture comp of nop is
+    signal heman : std_logic_vector(11 downto 0);
+    begin
+        heman <= "110111111000" when b = "0000" else (others=>'Z');
+        heman <= "110111111000" when b = "0001" else (others=>'Z');
+        heman <= "110111111000" when b = "0010" else (others=>'Z');
+        heman <= "110111111000" when b = "0011" else (others=>'Z');
+        heman <= "110111111000" when b = "0100" else (others=>'Z');
+        heman <= "110111111000" when b = "0101" else (others=>'Z');
+        heman <= "110111111000" when b = "0110" else (others=>'Z');
+
+        
+        heman <= "110011111000" when b = "0111" else (others=>'Z');
+        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "110111101000" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);        
+end architecture;
 
 
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity lda is
+entity lda is    
 	port(
         b: in std_logic_vector(3 downto 0);        
         c_ac :      out std_logic;
@@ -55,17 +70,31 @@ end lda;
 
 
 architecture comp of lda is
+    signal heman : std_logic_vector(11 downto 0);
     begin
-        c_PC <= (b(1) and b(0)) or (not(b(2)) and (not(b(0)))) or (b(2) and (not(b(1)))) or b(3);
-        sel_pc <= '1';
-        sel_mux <= (b(0) xor b(2)) or b(3) or b(1);
-        c_rem <= b(3) or b(2) or b(0);
-        r_notW <= '1';
-        c_rdm <= ((not b(2)) and ((not b(3) and (not b(0))) or (b(3) and (not b(1))))) or ((not b(3) and b(2)) and (b(0) or (not b(1))));
-        bloqueios <= '1';
-        c_ri <= b(3) or (not((b(1)))) or (not(b(0))) or (not(b(2)));
-        c_ac <= b(3) or (not(b(2))) or b(1) or b(0);
-        sel_ula <= "000";
+        heman <= "110111111000" when b = "0000" else (others=>'Z');
+        heman <= "110111111000" when b = "0001" else (others=>'Z');
+        heman <= "110011111000" when b = "0010" else (others=>'Z');
+        heman <= "011110111000" when b = "0011" else (others=>'Z');
+        heman <= "111011111000" when b = "0100" else (others=>'Z');
+        heman <= "111110111000" when b = "0101" else (others=>'Z');
+        heman <= "111111110000" when b = "0110" else (others=>'Z');
+        
+        heman <= "110011111000" when b = "0111" else (others=>'Z');
+        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "110111101000" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);      
+        
 end architecture;
 
 library ieee;
@@ -88,17 +117,30 @@ entity STA is
 end STA;
 
 architecture comp of STA is
+    signal heman : std_logic_vector(11 downto 0);
     begin
-        c_PC <= b(3) or ((not b(1)) and b(2)) or ((not b(0)) and (not b(2)) and (not b(3))) or ( (not b(3)) and b(1) and b(0));
-        sel_pc <= '1';
-        sel_mux <= b(1);
-        c_rem <= b(3) or b(2) or b(0);
-        r_notW <= b(1) or (b(0) and (not b(3)));
-        c_rdm <= b(3) or ((not b(0)) and (not b(2)) and (not b(3))) or ((not b(1)) and b(2)) or (b(2) and b(0) and (not b(3)));
-        bloqueios <= b(0) or b(1);
-        c_ri <= (not b(2)) or (not b(0)) or ((not b(1)) and b(2));
-        c_ac <= '1';
-        sel_ula <= "000";
+        heman <= "110111111000" when b = "0000" else (others=>'Z');
+        heman <= "110111111000" when b = "0001" else (others=>'Z');
+        heman <= "110011111000" when b = "0010" else (others=>'Z');
+        heman <= "011110111000" when b = "0011" else (others=>'Z');
+        heman <= "111011111000" when b = "0100" else (others=>'Z');
+        heman <= "111110111000" when b = "0101" else (others=>'Z');
+        heman <= "111101011000" when b = "0110" else (others=>'Z');
+        
+        heman <= "110011111000" when b = "0111" else (others=>'Z');
+        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "110111101000" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);  
 end architecture;
 
 library ieee;
@@ -121,19 +163,30 @@ entity NOTs is
 end NOTs;
 
 architecture comp of NOTs is
+    signal heman : std_logic_vector(11 downto 0);
     begin
-        c_PC<=((not(b(1)) or (b(0)) or (b(2))));
-	sel_pc<='1';
-	sel_mux<='0';
-	c_rem<=((not(b(0))) or (b(1)) or (b(2)) or (b(3)));
-	r_notW<='1';
-	c_rdm<=((not(b(1))) or (b(0)) or (b(2)));
-	bloqueios<='1';
-	c_ri<=((not(b(0))) or (not(b(1))) or (b(2)));
-	c_ac<=((b(0)) or (b(1)) or (b(2)) or (b(3)));
-	sel_ula(2)<=((not(b(3)) and not(b(2)) and not(b(1)) and not(b(0))));
-	sel_ula(1)<='0';
-	sel_ula(0)<='0';
+        heman <= "110111111100" when b = "0000" else (others=>'Z');
+        heman <= "110111111100" when b = "0001" else (others=>'Z');
+        heman <= "110111111100" when b = "0010" else (others=>'Z');
+        heman <= "110111111100" when b = "0011" else (others=>'Z');
+        heman <= "110111111100" when b = "0100" else (others=>'Z');
+        heman <= "110111111100" when b = "0101" else (others=>'Z');
+        heman <= "111111110100" when b = "0110" else (others=>'Z');                       
+
+        heman <= "110011111100" when b = "0111" else (others=>'Z');
+        heman <= "010110111100" when b = "1000" else (others=>'Z');
+        heman <= "110111101100" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);  
 end architecture;
 
 library ieee;
@@ -156,19 +209,30 @@ entity SHIFT is
 end SHIFT;
 
 architecture comp of SHIFT is
+    signal heman : std_logic_vector(11 downto 0);
     begin
-        c_PC<=((not(b(1)) or (b(0)) or (b(2))));
-	sel_pc<='1';
-	sel_mux<='0';
-	c_rem<=((not(b(0))) or (b(1)) or (b(2)) or (b(3)));
-	r_notW<='1';
-	c_rdm<=((not(b(1))) or (b(0)) or (b(2)));
-	bloqueios<='1';
-	c_ri<=((not(b(0))) or (not(b(1))) or (b(2)));
-	c_ac<=((b(0)) or (b(1)) or (b(2)) or (b(3)));
-	sel_ula(2)<=((not(b(3)) and not(b(2)) and not(b(1)) and not(b(0))));
-	sel_ula(1)<='0';
-    sel_ula(0)<=((not(b(3)) and not(b(2)) and not(b(1)) and not(b(0))));
+        heman <= "110111111101" when b = "0000" else (others=>'Z');
+        heman <= "110111111101" when b = "0001" else (others=>'Z');
+        heman <= "110111111101" when b = "0010" else (others=>'Z');
+        heman <= "110111111101" when b = "0011" else (others=>'Z');
+        heman <= "110111111101" when b = "0100" else (others=>'Z');
+        heman <= "110111111101" when b = "0101" else (others=>'Z');
+        heman <= "111111110101" when b = "0110" else (others=>'Z');                       
+
+        heman <= "110011111101" when b = "0111" else (others=>'Z');
+        heman <= "010110111101" when b = "1000" else (others=>'Z');
+        heman <= "110111101101" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);  
 end architecture;
 
 library ieee;
@@ -191,19 +255,34 @@ entity ANDs is
 end ANDs;
 
 architecture comp of ANDs is
+    signal heman : std_logic_vector(11 downto 0);
     begin
-    c_pc<= b(3) or (b(1) xnor b(0)) or (b(2) xnor b(0));
-	sel_PC<='1';
-	sel_mux<= (not b(3)) and (not b(2)) and b(1) and (not b(0));
-	c_rem<= b(3) or ((b(2) xor b(0)) or (b(2) and b(1)));
-	r_notW<='1';
-	c_rdm<= b(3) or (b(2) xnor b(0)) or (b(2) and (not b(1)));
-	bloqueios<='1';
-	c_ri<= b(3) or (not b(2)) or (not b(1)) or (not b(0));
-	c_ac<=b(3) or (not b(2)) or b(1) or b(0);
-	sel_ula(2)<='0';
-	sel_ula(1)<=((not b(3)) and b(2)) and ((not b(1)) and (not b(0)));
-	sel_ula(0)<=((not b(3)) and b(2)) and ((not b(1)) and (not b(0)));
+        heman <= "110111111011" when b = "0000" else (others=>'Z');
+        heman <= "110111111011" when b = "0001" else (others=>'Z');
+        heman <= "110011111011" when b = "0010" else (others=>'Z');
+        heman <= "011110111011" when b = "0011" else (others=>'Z');
+        heman <= "111011111011" when b = "0100" else (others=>'Z');
+        heman <= "111010111011" when b = "0101" else (others=>'Z');
+        heman <= "111111110011" when b = "0110" else (others=>'Z');    
+
+        heman <= "110011111011" when b = "0111" else (others=>'Z');
+        heman <= "010110111011" when b = "1000" else (others=>'Z');
+        heman <= "110111101011" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);  
+	
+	
+	
+
 end architecture;
 
 library ieee;
@@ -226,19 +305,31 @@ entity ADD is
 end ADD;
 
 architecture comp of ADD is
+    signal heman : std_logic_vector(11 downto 0);
     begin        
-    c_pc<= b(3) or (b(1) xnor b(0)) or (b(2) xnor b(0));
-	sel_PC<='1';
-	sel_mux<= (not b(3)) and (not b(2)) and b(1) and (not b(0));
-	c_rem<= b(3) or ((b(2) xor b(0)) or (b(2) and b(1)));
-	r_notW<='1';
-	c_rdm<= b(3) or (b(2) xnor b(0)) or (b(2) and (not b(1)));
-	bloqueios<='1';
-	c_ri<= b(3) or (not b(2)) or (not b(1)) or (not b(0));
-	c_ac<=b(3) or (not b(2)) or b(1) or b(0);
-	sel_ula(2)<='0';
-	sel_ula(1)<='0';
-	sel_ula(0)<=((not b(3)) and b(2)) and ((not b(1)) and (not b(0)));
+        
+        heman <= "110111111001" when b = "0000" else (others=>'Z');
+        heman <= "110111111001" when b = "0001" else (others=>'Z');
+        heman <= "110011111001" when b = "0010" else (others=>'Z');
+        heman <= "011110111001" when b = "0011" else (others=>'Z');
+        heman <= "111011111001" when b = "0100" else (others=>'Z');
+        heman <= "111010111001" when b = "0101" else (others=>'Z');
+        heman <= "111111110001" when b = "0110" else (others=>'Z');    
+
+        heman <= "110011111001" when b = "0111" else (others=>'Z');
+        heman <= "010110111001" when b = "1000" else (others=>'Z');
+        heman <= "110111101001" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);  
 end architecture;
 
 
@@ -262,19 +353,30 @@ entity ORs is
 end ORs;
 
 architecture comp of ORs is
+    signal heman : std_logic_vector(11 downto 0);
     begin        
-    c_pc<= b(3) or (b(1) xnor b(0)) or (b(2) xnor b(0));
-	sel_PC<='1';
-	sel_mux<= (not b(3)) and (not b(2)) and b(1) and (not b(0));
-	c_rem<= b(3) or ((b(2) xor b(0)) or (b(2) and b(1)));
-	r_notW<='1';
-	c_rdm<= b(3) or (b(2) xnor b(0)) or (b(2) and (not b(1)));
-	bloqueios<='1';
-	c_ri<= b(3) or (not b(2)) or (not b(1)) or (not b(0));
-	c_ac<=b(3) or (not b(2)) or b(1) or b(0);
-	sel_ula(2)<='0';
-	sel_ula(1)<=((not b(3)) and b(2)) and ((not b(1)) and (not b(0)));
-	sel_ula(0)<='0';
+        heman <= "110111111010" when b = "0000" else (others=>'Z');
+        heman <= "110111111010" when b = "0001" else (others=>'Z');
+        heman <= "110011111010" when b = "0010" else (others=>'Z');
+        heman <= "011110111010" when b = "0011" else (others=>'Z');
+        heman <= "111011111010" when b = "0100" else (others=>'Z');
+        heman <= "111010111010" when b = "0101" else (others=>'Z');
+        heman <= "111111110010" when b = "0110" else (others=>'Z');    
+
+        heman <= "110011111010" when b = "0111" else (others=>'Z');
+        heman <= "010110111010" when b = "1000" else (others=>'Z');
+        heman <= "110111101010" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);
 	
 end architecture;
 
@@ -298,19 +400,30 @@ entity JUMP is
 end JUMP;
 
 architecture comp of JUMP is
+    signal heman : std_logic_vector(11 downto 0);
     begin        
-    c_pc <= b(3) or b(0) or (b(1) and b(2)) or ((not b(1)) and (not b(2)));
-	sel_PC <= (not b(3)) and b(2) and (not b(1)) and (not b(0));
-	sel_mux<= '0';
-	c_rem<= b(3) or  b(2) or (b(1) xor b(0));
-	r_notW<='1';
-	c_rdm<= b(3) or b(1) or((not b(0)) and (not b(2))) or (b(2) and b(0));
-	bloqueios<= '1';
-	c_ri<= ((not b(3)) and (not b(2))) or ((not b(3)) and b(1)) or ((not b(3)) and (not b(1)) and (not b(0))) or (b(3) and (not b(2)) and (not b(1)));
-	c_ac<= '1';
-	sel_ula(2)<='0';
-	sel_ula(1)<='0';
-	sel_ula(0)<='0';
+        heman <= "110111111000" when b = "0000" else (others=>'Z');
+        heman <= "110111111000" when b = "0001" else (others=>'Z');
+        heman <= "110111111000" when b = "0010" else (others=>'Z');
+        heman <= "110111111000" when b = "0011" else (others=>'Z');
+        heman <= "110011111000" when b = "0100" else (others=>'Z');
+        heman <= "111110111000" when b = "0101" else (others=>'Z');
+        heman <= "001111111000" when b = "0110" else (others=>'Z');    
+
+        heman <= "110011111000" when b = "0111" else (others=>'Z');
+        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "110111101000" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);
 	
 end architecture;
 
@@ -336,17 +449,17 @@ end HLT;
 
 architecture comp of HLT is
     begin        
-    c_pc <= '1';
-	sel_PC <= '0';
-	sel_mux<= '0';
-	c_rem<= '1';
-	r_notW<='1';
-	c_rdm<= '1';
-	bloqueios<= '1';
-	c_ri<= '1';
-	c_ac<= '1';
-	sel_ula(2)<='0';
-	sel_ula(1)<='0';
-	sel_ula(0)<='0';
+        c_pc <= '1';
+        sel_PC <= '0';
+        sel_mux<= '0';
+        c_rem<= '1';
+        r_notW<='1';
+        c_rdm<= '1';
+        bloqueios<= '1';
+        c_ri<= '1';
+        c_ac<= '1';
+        sel_ula(2)<='0';
+        sel_ula(1)<='0';
+        sel_ula(0)<='0';
 	
 end architecture;

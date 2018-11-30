@@ -3,10 +3,6 @@ use ieee.std_logic_1164.all;
 
 
 entity neander is
-    port(
-        clk : in std_logic;
-        cl  : in std_logic
-    );
 end entity;
 
 architecture comp of neander is
@@ -98,22 +94,25 @@ architecture comp of neander is
         );
     end component;
     
-    signal C_pc , C_rem , C_rdm , C_ac , C_ir , Sel , selPCpp , r_not , blk, blkn : std_logic;
-    
-    signal B0,B1, B2, B3, B4, B5, B6, B7, B8 : std_logic_vector( 7 downto 0) := "00000000";
-    
+    signal C_pc , C_rem , C_rdm , C_ac , C_ir , Sel , selPCpp , r_not , blkn : std_logic;
+    signal blk,cl,snotcs,clk : std_logic := '1';
+    signal B0,B1, B2, B3, B4, B5, B7, B8 : std_logic_vector( 7 downto 0) := "00000000";
+    signal B6,BB : std_logic_vector( 7 downto 0) := "10101010";
     signal sel_ULA : std_logic_vector( 2 downto 0); 
-    
     signal NZ : std_logic_vector(1 downto 0);
-    
     signal cmds : std_logic_vector(11 downto 0);
     
     begin
     
-    RAM : as_ram
-        port map(B3 , B1 , r_not , '0');
+    blkn <= not blk;
+    snotcs <= not cl;
     
-    pcs : UC
+    --B8 <= in_ir;
+    
+    RAM : as_ram
+        port map(B3 , B1 , r_not , snotcs);
+    
+    UCs : UC
         port map(cmds , clk , cl , NZ , C_ac , sel_ULA , C_PC , selPCpp , sel , C_rem , C_rdm , blk , r_not , C_ir);
     
     ulas : ULA
@@ -127,27 +126,44 @@ architecture comp of neander is
         
     irs : REG
         port map(clk , cl , '1' , C_ir , B0 , B8);
-        
+         
     rdms : REG
         port map(clk , cl , '1' , C_rdm , B1 , B2);
         
     rems : REG
         port map(clk , cl , '1' , C_rem , B4 , B3);
         
-    block_rdms : block_8_bits
+    block_3 : block_8_bits
+        port map(B0 , blkn , B1);
+        
+    block_2 : block_8_bits
         port map(B2 , blk , B0);
     
-    block_mems : block_8_bits
-        port map(B0 , blk , B1);
-    
-    blkn <= not blk;
-    block_acs : block_8_bits
-        port map(B7 , blk, B0);
+    block_1 : block_8_bits
+        port map(B7 , blkn, B0);
         
     muxs : multiplex_2_8
         port map(B5 , B0 , sel , B4);
         
     decodUCs : decod_UC
         port map(B8 , cmds);
+        
+        
+    U_CLOCK: process
+    begin
+        clk <= not(clk);
+        wait for 10 ns;
+    end process;
     
+    proc: process
+    begin  
+        cl <= '0';
+        wait for 50 ns;
+        cl <= not cl;
+        
+        
+        wait for 900000 ns;
+    end process;
+    
+        
 end architecture;

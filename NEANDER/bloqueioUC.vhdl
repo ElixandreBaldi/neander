@@ -30,33 +30,17 @@ entity bloqUC is
 end bloqUC;
 
 architecture comp of bloqUC is
-       
-        signal  s_in  : std_logic_vector(8 downto 0);
-        signal  s_out : std_logic_vector(8 downto 0);
-      
       begin
        
-       s_in(0) <= c_ac;
-       s_in(1) <= c_PC;
-       s_in(2) <= sel_PC;
-       s_in(3) <= sel_mux;
-       s_in(4) <= c_rem;
-       s_in(5) <= c_rdm;
-       s_in(6) <= bloqueios;
-       s_in(7) <= r_notW;
-       s_in(8) <= c_ri;
-       
-       s_out <= s_in when p = '1' else ( others => 'Z');
-       out_sel_ula <= sel_ula when p = '1' else ( others => 'Z');
-       
-       out_c_ac      <= s_out(0);
-       out_c_PC      <= s_out(1);
-       out_sel_PC    <= s_out(2);
-       out_sel_mux   <= s_out(3);
-       out_c_rem     <= s_out(4);
-       out_c_rdm     <= s_out(5);
-       out_bloqueios <= s_out(6);
-       out_r_notW    <= s_out(7);
-       out_c_ri      <= s_out(8);
-       
+       out_c_ac      <= c_ac      when p = '1' else ('Z');
+       out_sel_ula   <= sel_ula   when p = '1' else (others => 'Z');
+       out_c_PC      <= c_PC      when p = '1' else ('Z');
+       out_sel_PC    <= sel_PC    when p = '1' else ('Z');
+       out_sel_mux   <= sel_mux   when p = '1' else ('Z');
+       out_c_rem     <= c_rem     when p = '1' else ('Z');
+       out_c_rdm     <= c_rdm     when p = '1' else ('Z');
+       out_bloqueios <= bloqueios when p = '1' else ('Z');
+       out_r_notW    <= r_notW    when p = '1' else ('Z');
+       out_c_ri      <= c_ri      when p = '1' else ('Z');
+        
 end architecture;

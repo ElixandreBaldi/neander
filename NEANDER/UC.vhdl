@@ -365,7 +365,7 @@ architecture comp of UC is
         port map(ss,hlt_c_ac,hlt_sel_ula,hlt_c_PC,hlt_sel_PC,hlt_sel_mux,hlt_c_rem,hlt_c_rdm,hlt_bloqueios,hlt_r_notW,hlt_c_ri);
         
     NOPs : nop
-        port map(ss,nop_c_ac,nop_sel_ula,nop_c_PC,nop_sel_PC,nop_sel_mux,nop_c_rem,nop_c_rdm,bloqueios,nop_r_notW,nop_c_ri);
+        port map(ss,nop_c_ac,nop_sel_ula,nop_c_PC,nop_sel_PC,nop_sel_mux,nop_c_rem,nop_c_rdm,nop_bloqueios,nop_r_notW,nop_c_ri);
         
     LDAs : lda
         port map(ss,lda_c_ac,lda_sel_ula,lda_c_PC,lda_sel_PC,lda_sel_mux,lda_c_rem,lda_c_rdm,lda_bloqueios,lda_r_notW,lda_c_ri);
