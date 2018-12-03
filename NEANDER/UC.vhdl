@@ -397,8 +397,8 @@ architecture comp of UC is
     JZs : JUMP
         port map(ss,jz_c_ac,jz_sel_ula,jz_c_PC,jz_sel_PC,jz_sel_mux,jz_c_rem,jz_c_rdm,jz_bloqueios,jz_r_notW,jz_c_ri);
         
-    p_n <= inst(8) and nz(0);
-    p_z <= inst(9) and nz(1);
+    p_n <= inst(9) and (not nz(0));
+    p_z <= inst(10) and (not nz(1));
         
         
     BLOCK_NOP : bloqUC
@@ -429,9 +429,13 @@ architecture comp of UC is
         port map(not_c_ac,not_sel_ula,not_c_PC,not_sel_PC,not_sel_mux,not_c_rem,not_c_rdm,not_bloqueios,not_r_notW,not_c_ri,
                  c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(6));
                  
+    BLOCK_SHIFT : bloqUC
+        port map(shift_c_ac,shift_sel_ula,shift_c_PC,shift_sel_PC,shift_sel_mux,shift_c_rem,shift_c_rdm,shift_bloqueios,shift_r_notW,shift_c_ri,
+                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(7));
+                 
     BLOCK_JMP : bloqUC
         port map(jmp_c_ac,jmp_sel_ula,jmp_c_PC,jmp_sel_PC,jmp_sel_mux,jmp_c_rem,jmp_c_rdm,jmp_bloqueios,jmp_r_notW,jmp_c_ri,
-                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(7));
+                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(8));
                  
     BLOCK_JN : bloqUC
         port map(jn_c_ac,jn_sel_ula,jn_c_PC,jn_sel_PC,jn_sel_mux,jn_c_rem,jn_c_rdm,jn_bloqueios,jn_r_notW,jn_c_ri,
@@ -443,6 +447,6 @@ architecture comp of UC is
                  
     BLOCK_HLT : bloqUC
         port map(hlt_c_ac,hlt_sel_ula,hlt_c_PC,hlt_sel_PC,hlt_sel_mux,hlt_c_rem,hlt_c_rdm,hlt_bloqueios,hlt_r_notW,hlt_c_ri,
-                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(10));
+                 c_ac,sel_ula,c_PC,sel_PC,sel_mux,c_rem,c_rdm,bloqueios,r_notW,c_ri,inst(11));
     
 end architecture;
