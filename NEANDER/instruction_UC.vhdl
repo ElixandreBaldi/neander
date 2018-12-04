@@ -427,7 +427,58 @@ architecture comp of JUMP is
 	
 end architecture;
 
+library ieee;
+use ieee.std_logic_1164.all;
 
+entity JUMP_c is
+	port(
+        c: in std_logic;
+        b: in std_logic_vector(3 downto 0);        
+        c_ac :      out std_logic;
+        sel_ula:    out std_logic_vector(2 downto 0);
+        c_PC:       out std_logic;
+        sel_PC:     out std_logic;
+        sel_mux :   out std_logic;
+        c_rem :     out std_logic;
+        c_rdm  :    out std_logic;
+        bloqueios : out std_logic;
+        r_notW :    out std_logic;
+        c_ri :      out std_logic        
+	);
+end JUMP_c;
+
+architecture comp of JUMP_c is
+    signal heman : std_logic_vector(11 downto 0);
+    begin        
+        heman <= "110111111000" when b = "0000" else (others=>'Z');
+        heman <= "110111111000" when b = "0001" else (others=>'Z');
+        heman <= "110111111000" when b = "0010" else (others=>'Z');
+        heman <= "110111111000" when b = "0011" else (others=>'Z');
+        heman <= "110011111000" when b = "0100" else (others=>'Z');
+        
+        heman <= "111110111000" when b = "0101" and c = '1' else (others=>'Z');
+        heman <= "001111111000" when b = "0110" and c = '1' else (others=>'Z'); 
+       
+        heman <= "110011111000" when b = "0101" and c = '0' else (others=>'Z');
+        heman <= "010011111000" when b = "0110" and c = '0' else (others=>'Z');
+     
+    
+        heman <= "110011111000" when b = "0111" else (others=>'Z');
+        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "110111101000" when b = "1001" else (others=>'Z');
+        
+        c_PC <= heman(11);
+        sel_pc <= heman(10);
+        sel_mux <= heman(9);
+        c_rem <= heman(8);
+        r_notW <= heman(7);
+        c_rdm <= heman(6);
+        bloqueios <= heman(5);
+        c_ri <= heman(4);
+        c_ac <= heman(3);        
+        sel_ula <= heman(2 downto 0);
+	
+end architecture;
 
 
 

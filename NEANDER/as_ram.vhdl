@@ -21,7 +21,7 @@ begin
 	
 	rampW : process(rnotw, notcs, addr, data)
 	type binary_file is file of character;
-	file load_file : binary_file open read_mode is "neanderram.mem";
+	file load_file : binary_file open read_mode is "cinco_e_2.MEM";
 	variable char : character;
 	begin
 		if (notcs = '1' and notcs'event) then

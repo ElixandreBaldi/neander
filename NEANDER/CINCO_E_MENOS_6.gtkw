@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Tue Dec  4 19:18:52 2018
+[*]
+[dumpfile] "/home/elixandre/Documents/neander/NEANDER/out.ghw"
+[dumpfile_mtime] "Tue Dec  4 19:14:49 2018"
+[dumpfile_size] 1878964
+[savefile] "/home/elixandre/Documents/neander/NEANDER/CINCO_E_MENOS_6.gtkw"
+[timestart] 106200000
+[size] 1440 835
+[pos] -1 -1
+*-27.063387 380700000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.neander.
+[treeopen] top.neander.ram.
+[treeopen] top.neander.ram.ram.
+[treeopen] top.neander.ucs.contador.
+[sst_width] 194
+[signals_width] 210
+[sst_expanded] 1
+[sst_vpaned_height] 231
+@24
+#{top.neander.ucs.contador.q[3:0]} top.neander.ucs.contador.q[3] top.neander.ucs.contador.q[2] top.neander.ucs.contador.q[1] top.neander.ucs.contador.q[0]
+@200
+-PC
+@24
+#{top.neander.pcss.s[7:0]} top.neander.pcss.s[7] top.neander.pcss.s[6] top.neander.pcss.s[5] top.neander.pcss.s[4] top.neander.pcss.s[3] top.neander.pcss.s[2] top.neander.pcss.s[1] top.neander.pcss.s[0]
+@200
+-REM
+@24
+#{top.neander.rems.s[7:0]} top.neander.rems.s[7] top.neander.rems.s[6] top.neander.rems.s[5] top.neander.rems.s[4] top.neander.rems.s[3] top.neander.rems.s[2] top.neander.rems.s[1] top.neander.rems.s[0]
+@200
+-RDM
+@24
+#{top.neander.rdms.s[7:0]} top.neander.rdms.s[7] top.neander.rdms.s[6] top.neander.rdms.s[5] top.neander.rdms.s[4] top.neander.rdms.s[3] top.neander.rdms.s[2] top.neander.rdms.s[1] top.neander.rdms.s[0]
+@200
+-IR
+@24
+#{top.neander.irs.s[7:0]} top.neander.irs.s[7] top.neander.irs.s[6] top.neander.irs.s[5] top.neander.irs.s[4] top.neander.irs.s[3] top.neander.irs.s[2] top.neander.irs.s[1] top.neander.irs.s[0]
+@200
+-AC
+@24
+#{top.neander.acs.s[7:0]} top.neander.acs.s[7] top.neander.acs.s[6] top.neander.acs.s[5] top.neander.acs.s[4] top.neander.acs.s[3] top.neander.acs.s[2] top.neander.acs.s[1] top.neander.acs.s[0]
+#{top.neander.ram.ram[132][7:0]} top.neander.ram.ram[132][7] top.neander.ram.ram[132][6] top.neander.ram.ram[132][5] top.neander.ram.ram[132][4] top.neander.ram.ram[132][3] top.neander.ram.ram[132][2] top.neander.ram.ram[132][1] top.neander.ram.ram[132][0]
+[pattern_trace] 1
+[pattern_trace] 0
