@@ -33,7 +33,7 @@ architecture comp of nop is
 
         
         heman <= "110011111000" when b = "0111" else (others=>'Z');
-        heman <= "010110111000" when b = "1000" else (others=>'Z');
+        heman <= "010110110000" when b = "1000" else (others=>'Z');
         heman <= "110111101000" when b = "1001" else (others=>'Z');
         
         c_PC <= heman(11);
@@ -426,6 +426,9 @@ architecture comp of JUMP is
         sel_ula <= heman(2 downto 0);
 	
 end architecture;
+
+
+
 
 
 library ieee;

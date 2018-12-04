@@ -397,8 +397,8 @@ architecture comp of UC is
     JZs : JUMP
         port map(ss,jz_c_ac,jz_sel_ula,jz_c_PC,jz_sel_PC,jz_sel_mux,jz_c_rem,jz_c_rdm,jz_bloqueios,jz_r_notW,jz_c_ri);
         
-    p_n <= inst(9) and (not nz(0));
-    p_z <= inst(10) and (not nz(1));
+    p_n <= inst(9) and (nz(1));
+    p_z <= inst(10) and (nz(0));
         
         
     BLOCK_NOP : bloqUC
